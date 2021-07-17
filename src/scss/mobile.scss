@@ -19,6 +19,7 @@
   padding: 1.5em;
   margin: 0 auto;
   max-width: 400px;
+  transition: all 0.3s ease-in-out;
 }
 
 .lbl {
@@ -42,6 +43,9 @@ input {
   outline: none;
   text-align: right;
   font-size: 1.1rem;
+  &:focus {
+    border: 1px solid $Strong-cyan;
+  }
 }
 
 .tip {
@@ -55,6 +59,7 @@ input {
     color: $Lighter-grayish-cyan;
     padding: 0.5em 2em;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out;
     &:hover {
       color: $Very-dark-cyan;
       background: $Strong-cyan;
