@@ -17,55 +17,64 @@
   <body>
     <section class="main">
       <div id="logo">
-        <h1>
-          S P L I <br />
-          T T E R
-        </h1>
+        <img src="./images/logo.svg" alt="splitter-logo" />
       </div>
-      <div class="calc container">
-        <div class="wrapper">
-          <label for="bill" class="lbl">Bill</label>
-          <div class="input-box">
-            <input type="number" value="0.00" id="bill" class="val" />
-            <img src="./images/icon-dollar.svg" alt="dollar-icon" />
+      <div class="container">
+        <div class="calc">
+          <div class="wrapper">
+            <label for="bill" class="lbl">Bill</label>
+            <div class="input-box row">
+              <img src="./images/icon-dollar.svg" alt="dollar-icon" />
+              <input type="number" value="0.00" id="bill" class="val" />
+            </div>
+          </div>
+          <div class="tip wrapper">
+            <label for="tip" class="lbl">Select Tip %</label>
+            <div class="tip-percent">
+              <span class="tip-val btn-active">5%</span>
+              <span class="tip-val">10%</span>
+              <span class="tip-val">15%</span>
+              <span class="tip-val">25%</span>
+              <span class="tip-val">50%</span>
+              <input
+                type="number"
+                name="custom"
+                id="custom-tip"
+                placeholder="Custom"
+              />
+            </div>
+          </div>
+          <div class="wrapper">
+            <div class="row">
+              <label class="lbl" for="People">Number of People</label>
+              <div class="error-msg">Can't be zero</div>
+            </div>
+            <div class="input-box row">
+              <img src="./images/icon-person.svg" alt="person-icon" />
+              <input type="number" name="people" id="people" value="1" />
+            </div>
           </div>
         </div>
-        <div class="tip wrapper">
-          <label for="tip" class="lbl">Select Tip %</label>
-          <span class="val">5%</span>
-          <span class="val">10%</span>
-          <span class="val">15%</span>
-          <span class="val">25%</span>
-          <span class="val">50%</span>
-          <input
-            type="number"
-            name="custom"
-            id="custom-tip"
-            placeholder="Custom"
-          />
-        </div>
-        <div class="wrapper">
-          <label for="People">Number of People</label>
-          <div class="input-box">
-            <img src="./images/icon-person.svg" alt="person-icon" />
-            <input type="number" name="people" id="people" value="1" />
-          </div>
-        </div>
-      </div>
 
-      <div class="results">
-        <div class="wrapper">
-          <label for="Tip Amount">Tip Amount</label>
-          <span>/ person</span>
-          <span id="tip-amount">$4.27</span>
-        </div>
-        <div class="wrapper">
-          <label for="total">Tip Amount</label>
-          <span>/ person</span>
-          <span id="total-amount">$32.79</span>
+        <div class="results">
+          <div class="wrapper row">
+            <div class="col">
+              <label for="Tip Amount">Tip Amount</label>
+              <span>/ person</span>
+            </div>
+            <span class="amount" id="tip-amount">$4.27</span>
+          </div>
+          <div class="wrapper row">
+            <div class="col">
+              <label for="total">Total</label>
+              <span>/ person</span>
+            </div>
+            <span class="amount" id="total-amount">$32.79</span>
+          </div>
+          <button class="reset">RESET</button>
         </div>
       </div>
-      <button>RESET</button>
     </section>
+    <script src="./scripts.js"></script>
   </body>
 </html>

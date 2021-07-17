@@ -1,0 +1,130 @@
+@use "colors" as *;
+
+#logo {
+  color: $Darker-grayish-cyan;
+  text-align: center;
+  margin: 2.5em auto;
+  font-size: 0.9rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  background: $White;
+  border-radius: 10px 10px 0 0;
+  padding: 1.5em;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.lbl {
+  display: block;
+  color: $Dark-grayish-cyan;
+  font-weight: 700;
+  margin: 1.5em 0 0.5em 0;
+}
+
+.input-box {
+  background: $Lighter-grayish-cyan;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+input {
+  background: transparent;
+  color: $Very-dark-cyan;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 1.1rem;
+}
+
+.tip {
+  span {
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    width: 48%;
+    display: inline;
+    background: $Very-dark-cyan;
+    color: $Lighter-grayish-cyan;
+    padding: 0.5em 2em;
+    border-radius: 5px;
+    &:hover {
+      color: $Very-dark-cyan;
+      background: $Strong-cyan;
+    }
+  }
+  #custom-tip {
+    display: inline-block;
+    text-align: center;
+    width: 48%;
+  }
+  .tip-percent {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    .btn-active {
+      color: $Very-dark-cyan;
+      background: $Strong-cyan;
+    }
+  }
+}
+
+.results {
+  margin-top: 1.5em;
+  background: $Very-dark-cyan;
+  border-radius: 10px;
+  padding: 1em;
+  span {
+    color: $Darker-grayish-cyan;
+  }
+  .row {
+    margin: 0.8em auto;
+  }
+  label {
+    display: block;
+    font-weight: 700;
+    color: $Lighter-grayish-cyan;
+  }
+  .amount {
+    color: $Strong-cyan;
+    font-weight: 700;
+    font-size: 1.7rem;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    background: $Strong-cyan;
+    color: $Very-dark-cyan;
+    width: 100%;
+    padding: 1em;
+    border-radius: 5px;
+    margin-top: 1.5em;
+    font-weight: 700;
+    font-size: 1rem;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.error-msg {
+  color: indianred;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 1.5em 0 0.5em 0;
+  opacity: 0;
+}
+
+.show-error-msg {
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}

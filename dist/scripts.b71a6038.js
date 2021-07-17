@@ -117,79 +117,118 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"scripts.js":[function(require,module,exports) {
+var bill = document.getElementById("bill");
+var tipBtns = document.querySelectorAll(".tip-val");
+var tipCustom = document.getElementById("custom-tip");
+var people = document.getElementById("people");
+var errorMsg = document.querySelector(".error-msg");
+var results = document.querySelectorAll(".amount");
+var resetBtn = document.querySelector(".reset");
+var billValue = 0.0; //default value
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
+var tipValue = 0.15; //default value -> 15% button is active
 
-  return bundleURL;
+var peopleValue = 1;
+
+function validateFloat(s) {
+  var rgx = /^[0-9]*\.?[0-9]*$/;
+  return s.match(rgx);
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+function validateInt(s) {
+  var rgx = /^[0-9]*$/;
+  return s.match(rgx);
+} //Events
 
-    if (matches) {
-      return getBaseURL(matches[0]);
+
+bill.addEventListener("input", setBillValue);
+tipBtns.forEach(function (btn) {
+  btn.addEventListener("click", setFixPercent);
+});
+tipCustom.addEventListener("input", setTipCustomValue);
+people.addEventListener("input", setPeopleValue);
+resetBtn.addEventListener("click", reset);
+
+function setFixPercent(event) {
+  tipBtns.forEach(function (btn) {
+    //clear active state
+    btn.classList.remove("btn-active"); //set active state
+
+    if (event.target.innerHTML == btn.innerHTML) {
+      btn.classList.add("btn-active");
+      tipValue = parseFloat(btn.innerHTML) / 100;
     }
+  }); //clear custom tip
+
+  tipCustom.value = "";
+  calculateTip(); //console.log(tipValue);
+}
+
+function setTipCustomValue() {
+  if (!validateInt(tipCustom.value)) {
+    tipCustom.value = tipCustom.value.substring(0, tipCustom.value.length - 1);
   }
 
-  return '/';
+  tipValue = parseFloat(tipCustom.value / 100); //remove active state from buttons
+
+  tipBtns.forEach(function (btn) {
+    btn.classList.remove("btn-active");
+  });
+
+  if (tipCustom.value !== "") {
+    calculateTip();
+  } //console.log(tipValue);
+
 }
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
+function setBillValue() {
+  if (bill.value.includes(",")) {
+    bill.value = bill.value.replace(",", ".");
   }
 
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
+  if (!validateFloat(bill.value)) {
+    bill.value = bill.value.substring(0, bill.value.length - 1);
+  }
 
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
+  billValue = parseFloat(bill.value);
+  calculateTip(); //console.log(billValue);
 }
 
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"scss/main.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
+function setPeopleValue() {
+  if (!validateInt(people.value)) {
+    people.value = people.value.substring(0, people.value.length - 1);
+  }
 
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  peopleValue = parseFloat(people.value);
+
+  if (peopleValue <= 0) {
+    errorMsg.classList.add("show-error-msg");
+    setTimeout(function () {
+      errorMsg.classList.remove("show-error-msg");
+    }, 3000);
+  }
+
+  calculateTip(); //console.log(peopleValue);
+}
+
+function calculateTip() {
+  if (peopleValue >= 1) {
+    var tipAmount = billValue * tipValue / peopleValue;
+    var total = billValue * (tipValue + 1) / peopleValue;
+    results[0].innerHTML = "$" + tipAmount.toFixed(2);
+    results[1].innerHTML = "$" + total.toFixed(2);
+  }
+}
+
+function reset() {
+  bill.value = "0.0";
+  setBillValue();
+  tipBtns[2].click();
+  people.value = "1";
+  setPeopleValue();
+}
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -393,5 +432,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/main.77bb5cfd.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts.js"], null)
+//# sourceMappingURL=/scripts.b71a6038.js.map
