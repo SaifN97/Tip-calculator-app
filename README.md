@@ -42,16 +42,17 @@ Users should be able to:
 - CSS custom properties
 - SASS
 - Flexbox
+- Javascript
 
 ### What I learned
 
-Some hands on expirience creating responsive layout with css flexbox and SASS with parcel bundler workflow
+Some hands on expirience creating responsive layout with javascript dom manipulation css flexbox and SASS with parcel bundler workflow
 
 ### Continued development
 
 1. Responsive layouts
 1. Mobile First Approach
-1. Email validation with javascript
+1.DOM Manipulation with javascript
 
 ### Useful resources
 
